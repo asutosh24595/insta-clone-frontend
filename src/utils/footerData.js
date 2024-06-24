@@ -1,0 +1,54 @@
+export const footerData = [
+    {
+        id:1,
+        title:"Meta",
+    },
+    {
+        id:2,
+        title:"About",
+    },
+    {
+        id:3,
+        title:"Blog",
+    },
+    {
+        id:4,
+        title:"Jobs",
+    },
+    {
+        id:5,
+        title:"Help",
+    },
+    {
+        id:6,
+        title:"API",
+    },
+    {
+        id:7,
+        title:"Privacy",
+    },
+    {
+        id:8,
+        title:"Terms",
+    },
+    {
+        id:9,
+        title:"Locations",
+    },
+    {
+        id:10,
+        title:"Instagram Lite",
+    },
+    {
+        id:11,
+        title:"Threads",
+    },
+    {
+        id:12,
+        title:"Contact Uploading & Non-Users",
+    },
+    {
+        id:13,
+        title:"Meta Verified"
+    }
+]
