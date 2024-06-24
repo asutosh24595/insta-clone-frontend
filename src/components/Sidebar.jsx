@@ -70,14 +70,14 @@ const Sidebar = () => {
             Profile
           </p>
         </NavLink>
-        <NavLink
-          to="/home"
+        <div
+          to="/"
           className="w-full h-auto p-2 bg-transparent hover:bg-gray-800/60 ease-out rounded-md duration-500 group mb-2"
         >
           <p className="lg:block md:block sm:hidden hidden">
             <More />
           </p>
-        </NavLink>
+        </div>
       </div>
     </div>
   );
