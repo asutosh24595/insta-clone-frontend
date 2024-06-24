@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { imgs } from "../utils/imagesData";
 import { motion, AnimatePresence } from "framer-motion";
 import instaLogo from "../assets/Login-SignUp-Images/Logo-Instagram.png";
 import fbLogo from "../assets/Login-SignUp-Images/fbLogo.png";
@@ -8,6 +7,8 @@ import microsoft from "../assets/Login-SignUp-Images/microsoft.png";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { RotatingLines } from "react-loader-spinner";
+import { ref, onValue } from "firebase/database"; // Import Firebase Realtime Database functions
+import { db } from "../firebase.config";
 
 const Login = () => {
   const auth = getAuth();
@@ -21,15 +22,34 @@ const Login = () => {
   const [isPwdVisible, setPwdVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [carouselImages, setCarouselImages] = useState([]); // State to hold carousel images
 
   const navigate = useNavigate();
 
   useEffect(() => {
+
+    const imagesRef = ref(db, "LoginImages");
+
+    console.log("imagesRef:", imagesRef); // Log to check the reference
+    onValue(imagesRef, (snapshot) => {
+      const imageData = snapshot.val();
+      console.log("imageData:", imageData); // Log the imageData to check if it exists
+      if (imageData) {
+        const images = Object.values(imageData);
+        console.log("images:", images); // Log the fetched images
+        setCarouselImages(images);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImgIndex((prevIndex) => (prevIndex + 1) % imgs.length);
+      setCurrentImgIndex(
+        (prevIndex) => (prevIndex + 1) % carouselImages.length
+      );
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [carouselImages]);
 
   useEffect(() => {
     const validateInput = () => {
@@ -94,13 +114,13 @@ const Login = () => {
           />
           <div className="absolute top-[4%] left-[32%] w-[250px] h-[542px] overflow-hidden">
             <AnimatePresence>
-              {imgs.map(
-                (image, index) =>
+              {carouselImages.map(
+                (imageUrl, index) =>
                   index === currentImgIndex && (
                     <motion.img
-                      key={image.id}
-                      src={image.src}
-                      alt={image.alt}
+                      key={index}
+                      src={imageUrl}
+                      alt={`Carousel Image ${index}`}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 1, ease: "easeInOut" }}
