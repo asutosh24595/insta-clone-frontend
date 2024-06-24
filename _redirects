@@ -1,2 +1,5 @@
-/src/main.jsx /src/main.jsx 200
-Content-Type: application/javascript
+# Redirect from old URL to new URL
+/old-path /new-path 301
+
+# Redirect all requests to index.html (typical for SPAs)
+/* /index.html 200
