@@ -1,4 +1,12 @@
 [[headers]]
-for = "/src/main.jsx"
-  [headers.values]
-  Content-Type = "application/javascript"
+  # Define headers for all paths (/*)
+  for = "/*"
+    [headers.values]
+    Content-Type = "text/html"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[redirects]]
+  # Redirect all requests to index.html (typical for SPAs)
+  from = "/*"
+  to = "/index.html"
+  status = 200

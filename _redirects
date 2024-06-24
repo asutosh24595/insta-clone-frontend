@@ -1,0 +1,5 @@
+# Redirect from old-path to new-path with status 301 (permanent redirect)
+/old-path /new-path 301
+
+# Redirect all requests to index.html (typical for SPAs)
+/* /index.html 200
