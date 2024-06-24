@@ -22,7 +22,7 @@ const Login = () => {
   const [isPwdVisible, setPwdVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [carouselImages, setCarouselImages] = useState([]); // State to hold carousel images
+  const [carouselImages, setCarouselImages] = useState([]); 
 
   const navigate = useNavigate();
 
@@ -30,13 +30,10 @@ const Login = () => {
 
     const imagesRef = ref(db, "LoginImages");
 
-    console.log("imagesRef:", imagesRef); // Log to check the reference
     onValue(imagesRef, (snapshot) => {
       const imageData = snapshot.val();
-      console.log("imageData:", imageData); // Log the imageData to check if it exists
       if (imageData) {
         const images = Object.values(imageData);
-        console.log("images:", images); // Log the fetched images
         setCarouselImages(images);
       }
     });
